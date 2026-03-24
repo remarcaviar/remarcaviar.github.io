@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion — Remarcaviar</title><!-- CHANGE THIS -->
+    <title>Business — Remarcaviar</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap"
         rel="stylesheet">
@@ -602,25 +602,11 @@
     <div class="page-header">
         <a href="blogs.html" class="back-link">← All Categories</a>
         <div class="page-eyebrow">Category</div>
-        <h1 class="page-title">Fashion <em>Articles</em></h1><!-- CHANGE THIS -->
+        <h1 class="page-title">Business <em>Articles</em></h1>
     </div>
 
     <div class="articles-grid" id="articlesGrid">
-        <!-- CHANGE THESE ARTICLES for each category -->
-        <div class="article-card">
-            <div class="article-num">01</div>
-            <h2 class="article-title">The New Silhouette: What Shapes Are Saying This Season</h2>
-            <p class="article-excerpt">From oversized shoulders to fluid bias cuts, the silhouette has become fashion's
-                most expressive language. An analysis of what the body's outline is communicating right now.</p>
-            <a href="#" class="article-read">Read Article →</a>
-        </div>
-        <div class="article-card">
-            <div class="article-num">02</div>
-            <h2 class="article-title">Heritage vs Hype: How Luxury Houses Stay Relevant</h2>
-            <p class="article-excerpt">Balancing a century of legacy with the demands of a new generation — the
-                strategic tension every heritage brand navigates in the age of virality.</p>
-            <a href="#" class="article-read">Read Article →</a>
-        </div>
+        <p class="coming-soon">No articles yet. Add your own articles below in this section.</p>
     </div>
     <p class="coming-soon">More articles coming soon.</p>
 
@@ -639,22 +625,12 @@
         (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .1 });
         document.querySelectorAll('.article-card').forEach(el => obs.observe(el));
-        // Search - Extract articles from current page + static list
+        // Search - Extract articles from current page only (start fresh)
         const buildAllArticles = () => {
-            let allArticles = [
-                { title: "The New Silhouette: What Shapes Are Saying This Season", cat: "Fashion", page: "fashion-articles.html" },
-                { title: "Heritage vs Hype: How Luxury Houses Stay Relevant", cat: "Fashion", page: "fashion-articles.html" },
-                { title: "The Business of Being Chanel", cat: "Business", page: "business-articles.html" },
-                { title: "How LVMH Built the World's Largest Luxury Empire", cat: "Business", page: "business-articles.html" },
-                { title: "Quiet Luxury: The Trend That Refused to Leave", cat: "Trends", page: "trends-articles.html" },
-                { title: "The Return of Maximalism", cat: "Trends", page: "trends-articles.html" },
-                { title: "Fashion and Identity: Dressing as a Political Act", cat: "Culture", page: "culture-articles.html" },
-                { title: "When Art Meets the Runway", cat: "Culture", page: "culture-articles.html" },
-            ];
-            // Scan current page for article cards and add them
+            const allArticles = [];
             const pageTitle = document.querySelector('.page-title')?.textContent || '';
-            const category = pageTitle.split(' ')[0]; // Extract category from title
-            const currentPage = window.location.pathname.split('/').pop() || 'fashion-articles.html';
+            const category = pageTitle.split(' ')[0];
+            const currentPage = window.location.pathname.split('/').pop() || '';
             document.querySelectorAll('.article-card').forEach((card) => {
                 const title = card.querySelector('.article-title')?.textContent?.trim();
                 if (title && !allArticles.some(a => a.title === title)) {
