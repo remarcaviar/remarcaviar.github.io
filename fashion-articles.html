@@ -85,6 +85,31 @@
             text-decoration: none;
         }
 
+        .nav-search-btn {
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            pointer-events: auto;
+            padding: 8px;
+            transition: opacity .2s;
+        }
+
+        .nav-search-btn:hover {
+            opacity: .5;
+        }
+
+        .nav-search-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #111;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
         .nav-bottom {
             display: flex;
             align-items: center;
@@ -320,6 +345,121 @@
             color: #111;
         }
 
+        /* SEARCH OVERLAY */
+        #search-panel {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(255, 255, 255, .97);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+
+        #search-panel.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 640px;
+            padding: 0 24px;
+        }
+
+        .search-label {
+            font-size: .62rem;
+            font-weight: 400;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1.5px solid #111;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #111;
+            background: transparent;
+            outline: none;
+            padding-bottom: 12px;
+            letter-spacing: .04em;
+        }
+
+        .search-results {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 340px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, .07);
+            text-decoration: none;
+            display: block;
+            transition: padding-left .2s;
+        }
+
+        .search-result-item:hover {
+            padding-left: 8px;
+        }
+
+        .sri-cat {
+            font-size: .58rem;
+            font-weight: 400;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 6px;
+        }
+
+        .sri-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #111;
+        }
+
+        .search-empty {
+            font-size: .85rem;
+            color: #aaa;
+            font-weight: 300;
+            letter-spacing: .06em;
+            margin-top: 12px;
+        }
+
+        .search-close {
+            position: absolute;
+            top: 32px;
+            right: 48px;
+            font-size: .62rem;
+            font-weight: 400;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: #aaa;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color .2s;
+        }
+
+        .search-close:hover {
+            color: #111;
+        }
+
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -342,6 +482,11 @@
                 padding: 10px 20px
             }
 
+            .nav-bottom a {
+                font-size: 0.8rem;
+                letter-spacing: 0.2em;
+            }
+
             .nav-spacer {
                 height: 92px
             }
@@ -350,14 +495,59 @@
                 padding: 40px 24px 32px
             }
 
+            .page-eyebrow {
+                font-size: 0.7rem;
+                letter-spacing: 0.3em;
+            }
+
+            .page-title {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin-bottom: 32px;
+            }
+
+            .back-link {
+                font-size: 0.85rem;
+                margin-bottom: 24px;
+            }
+
             .articles-grid {
                 grid-template-columns: 1fr;
                 padding: 48px 24px 64px;
                 gap: 36px
             }
 
+            .article-num {
+                font-size: 3rem;
+                line-height: 1;
+            }
+
+            .article-title {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                margin: 20px 0;
+            }
+
+            .article-excerpt {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .article-read {
+                font-size: 0.8rem;
+                letter-spacing: 0.2em;
+            }
+
             .coming-soon {
-                padding: 0 24px 48px
+                padding: 0 24px 48px;
+                font-size: 1rem;
+            }
+
+            .footer-logo {
+                font-size: 1rem
+            }
+
+            .footer-copy {
+                font-size: 0.7rem
             }
 
             footer {
@@ -370,6 +560,10 @@
             .footer-links {
                 justify-content: center
             }
+
+            .footer-links a {
+                font-size: 0.7rem
+            }
         }
     </style>
 </head>
@@ -378,7 +572,12 @@
     <div id="cur"></div>
     <div id="cur-ring"></div>
     <nav>
-        <div class="nav-top"><a href="index.html" class="nav-logo">Remarcaviar</a></div>
+        <div class="nav-top"><a href="index.html" class="nav-logo">Remarcaviar</a><button class="nav-search-btn" id="searchBtn" aria-label="Search">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="22" y2="22" />
+                </svg>
+            </button></div>
         <div class="nav-bottom">
             <a href="blogs.html" class="active">Blogs</a>
             <a href="about.html">About</a>
@@ -386,6 +585,16 @@
         </div>
     </nav>
     <div class="nav-spacer"></div>
+
+    <div id="search-panel">
+        <button class="search-close" id="searchClose">Close ✕</button>
+        <div class="search-box">
+            <span class="search-label">Search articles</span>
+            <input class="search-input" id="searchInput" type="text" placeholder="e.g. Chanel, trends, luxury…" autocomplete="off">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
     <div class="page-header">
         <a href="blogs.html" class="back-link">← All Categories</a>
         <div class="page-eyebrow">Category</div>
@@ -426,7 +635,37 @@
         (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .1 });
         document.querySelectorAll('.article-card').forEach(el => obs.observe(el));
-    </script>
+        // Search
+        const articles = [
+            { title: "The New Silhouette: What Shapes Are Saying This Season", cat: "Fashion", page: "fashion-articles.html" },
+            { title: "Heritage vs Hype: How Luxury Houses Stay Relevant", cat: "Fashion", page: "fashion-articles.html" },
+            { title: "The Business of Being Chanel", cat: "Business", page: "business-articles.html" },
+            { title: "How LVMH Built the World's Largest Luxury Empire", cat: "Business", page: "business-articles.html" },
+            { title: "Quiet Luxury: The Trend That Refused to Leave", cat: "Trends", page: "trends-articles.html" },
+            { title: "The Return of Maximalism", cat: "Trends", page: "trends-articles.html" },
+            { title: "Fashion and Identity: Dressing as a Political Act", cat: "Culture", page: "culture-articles.html" },
+            { title: "When Art Meets the Runway", cat: "Culture", page: "culture-articles.html" },
+        ];
+        const panel = document.getElementById('search-panel');
+        const input = document.getElementById('searchInput');
+        const results = document.getElementById('searchResults');
+        document.getElementById('searchBtn').addEventListener('click', () => { panel.classList.add('open'); setTimeout(() => input.focus(), 200); });
+        document.getElementById('searchClose').addEventListener('click', () => panel.classList.remove('open'));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') panel.classList.remove('open'); });
+        input.addEventListener('input', () => {
+            const q = input.value.trim().toLowerCase();
+            results.innerHTML = '';
+            if (!q) return;
+            const filtered = articles.filter(a => a.title.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q));
+            if (filtered.length === 0) { results.innerHTML = '<p class="search-empty">No results found.</p>'; return; }
+            filtered.forEach(a => {
+                const el = document.createElement('a');
+                el.href = a.page;
+                el.className = 'search-result-item';
+                el.innerHTML = `<div class="sri-cat">${a.cat}</div><div class="sri-title">${a.title}</div>`;
+                results.appendChild(el);
+            });
+        });    </script>
 </body>
 
 </html>
