@@ -26,7 +26,8 @@
             color: #111;
             font-family: 'Jost', sans-serif;
             font-weight: 300;
-            cursor: none;
+            cursor: auto;
+            #cur, #cur-ring { display: none !important; }
             overflow-x: hidden;
         }
 
@@ -204,7 +205,8 @@
             overflow: hidden;
             display: flex;
             align-items: flex-end;
-            cursor: none;
+            cursor: auto;
+            #cur, #cur-ring { display: none !important; }
         }
 
         .cat-item img {
@@ -671,18 +673,19 @@
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-        // Search - Build articles dynamically from all pages
+        // Search - each page starts with page-local cards only
         const buildAllArticles = () => {
-            return [
-                { title: "The New Silhouette: What Shapes Are Saying This Season", cat: "Fashion", page: "fashion-articles.html" },
-                { title: "Heritage vs Hype: How Luxury Houses Stay Relevant", cat: "Fashion", page: "fashion-articles.html" },
-                { title: "The Business of Being Chanel", cat: "Business", page: "business-articles.html" },
-                { title: "How LVMH Built the World's Largest Luxury Empire", cat: "Business", page: "business-articles.html" },
-                { title: "Quiet Luxury: The Trend That Refused to Leave", cat: "Trends", page: "trends-articles.html" },
-                { title: "The Return of Maximalism", cat: "Trends", page: "trends-articles.html" },
-                { title: "Fashion and Identity: Dressing as a Political Act", cat: "Culture", page: "culture-articles.html" },
-                { title: "When Art Meets the Runway", cat: "Culture", page: "culture-articles.html" },
-            ];
+            const allArticles = [];
+            const pageTitle = document.querySelector('.page-title')?.textContent || '';
+            const category = pageTitle.split(' ')[0];
+            const currentPage = window.location.pathname.split('/').pop() || '';
+            document.querySelectorAll('.article-card').forEach((card) => {
+                const title = card.querySelector('.article-title')?.textContent?.trim();
+                if (title && !allArticles.some(a => a.title === title)) {
+                    allArticles.push({ title, cat: category, page: currentPage });
+                }
+            });
+            return allArticles;
         };
         const articles = buildAllArticles();
         const panel = document.getElementById('search-panel');
