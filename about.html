@@ -681,16 +681,24 @@
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
         (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
 
-        // Search - each page starts with page-local cards only
+        // Search - include site-wide index and page-local cards
         const buildAllArticles = () => {
             const allArticles = [];
+            // Global fallback articles (for pages without local article cards)
+            allArticles.push({
+                title: 'The Loudest Thing Bottega Veneta Ever Did Was Say Nothing',
+                cat: 'Business',
+                page: 'business-article-1.html'
+            });
+
             const pageTitle = document.querySelector('.page-title')?.textContent || '';
-            const category = pageTitle.split(' ')[0];
+            const category = pageTitle.split(' ')[0] || 'All';
             const currentPage = window.location.pathname.split('/').pop() || '';
             document.querySelectorAll('.article-card').forEach((card) => {
                 const title = card.querySelector('.article-title')?.textContent?.trim();
+                const link = card.querySelector('.article-read')?.href || currentPage;
                 if (title && !allArticles.some(a => a.title === title)) {
-                    allArticles.push({ title, cat: category, page: currentPage });
+                    allArticles.push({ title, cat: category, page: link });
                 }
             });
             return allArticles;
