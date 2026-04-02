@@ -624,16 +624,23 @@
         (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .1 });
         document.querySelectorAll('.article-card').forEach(el => obs.observe(el));
-        // Search - Extract articles from current page only (start fresh)
+        // Search - global search
         const buildAllArticles = () => {
             const allArticles = [];
+            // Hardcoded articles for now
+            allArticles.push({
+                title: 'The Loudest Thing Bottega Veneta Ever Did Was Say Nothing',
+                cat: 'Business',
+                page: 'business-article-1.html'
+            });
+            // Add local articles
             const pageTitle = document.querySelector('.page-title')?.textContent || '';
             const category = pageTitle.split(' ')[0];
-            const currentPage = window.location.pathname.split('/').pop() || '';
             document.querySelectorAll('.article-card').forEach((card) => {
                 const title = card.querySelector('.article-title')?.textContent?.trim();
+                const link = card.querySelector('.article-read')?.href || '';
                 if (title && !allArticles.some(a => a.title === title)) {
-                    allArticles.push({ title, cat: category, page: currentPage });
+                    allArticles.push({ title, cat: category, page: link });
                 }
             });
             return allArticles;
