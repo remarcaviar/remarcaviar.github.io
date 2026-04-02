@@ -673,18 +673,16 @@
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-        // Search - each page starts with page-local cards only
+        // Search - global search from blogs page
         const buildAllArticles = () => {
             const allArticles = [];
-            const pageTitle = document.querySelector('.page-title')?.textContent || '';
-            const category = pageTitle.split(' ')[0];
-            const currentPage = window.location.pathname.split('/').pop() || '';
-            document.querySelectorAll('.article-card').forEach((card) => {
-                const title = card.querySelector('.article-title')?.textContent?.trim();
-                if (title && !allArticles.some(a => a.title === title)) {
-                    allArticles.push({ title, cat: category, page: currentPage });
-                }
+            // Hardcoded articles for now - in a real site, this would be from a CMS or API
+            allArticles.push({
+                title: 'The Loudest Thing Bottega Veneta Ever Did Was Say Nothing',
+                cat: 'Business',
+                page: 'business-article-1.html'
             });
+            // Add more articles here as they are added
             return allArticles;
         };
         const articles = buildAllArticles();
