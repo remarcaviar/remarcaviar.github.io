@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bandhgala Misnamed — Remarcaviar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:#fff; color:#111; font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:200; background:rgba(255,255,255,.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,0,0,.08); }
+.nav-top { display:flex; align-items:center; justify-content:center; padding:20px 48px; position:relative; }
+.nav-logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.6rem; letter-spacing:.18em; text-transform:uppercase; color:#111; text-decoration:none; }
+.nav-bottom { display:flex; align-items:center; justify-content:center; gap:56px; padding:11px 48px; border-top:1px solid rgba(0,0,0,.06); }
+.nav-bottom a { font-size:.65rem; font-weight:400; letter-spacing:.28em; text-transform:uppercase; color:#555; text-decoration:none; transition:color .2s; position:relative; }
+.nav-bottom a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:#111; transition:width .3s; }
+.nav-bottom a:hover, .nav-bottom a.active { color:#111; }
+.nav-bottom a:hover::after, .nav-bottom a.active::after { width:100%; }
+.nav-spacer { height:104px; }
+
+.hero { width:100%; height:92vh; position:relative; overflow:hidden; }
+.hero img { width:100%; height:100%; object-fit:cover; object-position:center; filter:brightness(.75); }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,.65) 100%); }
+.hero-content { position:absolute; bottom:0; left:0; right:0; padding:56px 80px; opacity:0; animation:fadeUp .9s .3s forwards; }
+.hero-category { font-size:.6rem; font-weight:400; letter-spacing:.38em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+.hero-category::before { content:''; width:20px; height:1px; background:rgba(255,255,255,.4); }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,4.2rem); font-weight:300; color:#fff; line-height:1.1; letter-spacing:-.01em; max-width:780px; margin-bottom:16px; }
+.hero-subtitle { font-size:.85rem; font-weight:300; color:rgba(255,255,255,.6); letter-spacing:.04em; max-width:520px; }
+
+.article-meta { max-width:720px; margin:0 auto; padding:48px 40px 0; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,.08); padding-bottom:24px; opacity:0; animation:fadeUp .8s .5s forwards; }
+.meta-left { display:flex; align-items:center; gap:24px; }
+.meta-author { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:#111; font-weight:400; }
+.meta-divider { width:1px; height:16px; background:rgba(0,0,0,.15); }
+.meta-date { font-size:.62rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; color:#aaa; }
+.meta-category { font-size:.62rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; color:#111; padding:5px 14px; border:1px solid rgba(0,0,0,.15); }
+
+.article-body { max-width:720px; margin:0 auto; padding:56px 40px 80px; }
+.article-body p { font-family:'Cormorant Garamond',serif; font-size:1.22rem; font-weight:300; line-height:1.95; color:#222; margin-bottom:32px; opacity:0; transform:translateY(16px); transition:opacity .7s, transform .7s; }
+.article-body p.in { opacity:1; transform:translateY(0); }
+
+.pull-quote { border-left:2px solid #111; padding:8px 0 8px 32px; margin:48px 0; opacity:0; transform:translateY(16px); transition:opacity .7s, transform .7s; }
+.pull-quote.in { opacity:1; transform:translateY(0); }
+.pull-quote p { font-family:'Cormorant Garamond',serif; font-size:1.6rem !important; font-style:italic; font-weight:300; color:#111; line-height:1.5; margin-bottom:0 !important; opacity:1 !important; transform:none !important; }
+
+.sources { max-width:720px; margin:0 auto; padding:40px 40px 80px; border-top:1px solid rgba(0,0,0,.08); opacity:0; transform:translateY(16px); transition:opacity .7s, transform .7s; }
+.sources.in { opacity:1; transform:translateY(0); }
+.sources-label { font-size:.6rem; font-weight:400; letter-spacing:.28em; text-transform:uppercase; color:#aaa; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.sources-label::after { content:''; flex:0 0 24px; height:1px; background:#ddd; }
+.sources ul { list-style:none; }
+.sources ul li { font-size:.78rem; font-weight:300; color:#aaa; line-height:1.8; padding:6px 0; border-bottom:1px solid rgba(0,0,0,.05); }
+.sources ul li a { color:#aaa; text-decoration:none; transition:color .2s; }
+.sources ul li a:hover { color:#111; }
+
+.article-back { max-width:720px; margin:0 auto; padding:0 40px 48px; }
+.back-link { font-size:.62rem; font-weight:400; letter-spacing:.22em; text-transform:uppercase; color:#aaa; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:color .2s; }
+.back-link:hover { color:#111; }
+
+footer { padding:36px 72px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(0,0,0,.08); }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.1rem; letter-spacing:.18em; text-transform:uppercase; color:#111; text-decoration:none; }
+.footer-copy { font-size:.62rem; font-weight:300; letter-spacing:.16em; text-transform:uppercase; color:#aaa; }
+.footer-links { display:flex; gap:32px; }
+.footer-links a { font-size:.62rem; font-weight:300; letter-spacing:.16em; text-transform:uppercase; color:#aaa; text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:#111; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+@media(max-width:768px){
+  .nav-top{padding:16px 20px} .nav-bottom{gap:24px;padding:10px 20px}
+  .nav-spacer{height:92px}
+  .hero{height:75vh}
+  .hero-content{padding:36px 24px}
+  .hero-title{font-size:clamp(1.8rem,7vw,3rem)}
+  .article-meta{padding:32px 24px 20px}
+  .meta-left{flex-direction:column;align-items:flex-start;gap:8px}
+  .meta-divider{display:none}
+  .article-body{padding:40px 24px 60px}
+  .article-body p{font-size:1.1rem}
+  .pull-quote{padding:8px 0 8px 20px;margin:36px 0}
+  .pull-quote p{font-size:1.3rem !important}
+  .sources{padding:32px 24px 60px}
+  .article-back{padding:0 24px 36px}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:28px 24px}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-top"><a href="index.html" class="nav-logo">Remarcaviar</a></div>
+  <div class="nav-bottom">
+    <a href="blogs.html" class="active">Blogs</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<div class="nav-spacer"></div>
+
+<div class="hero">
+  <img src="bandhgala-hero.jpg" alt="The Bandhgala">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-category">Culture</div>
+    <h1 class="hero-title">The Bandhgala Misnamed</h1>
+    <p class="hero-subtitle">How fashion's vocabulary keeps erasing India's most formal silhouette</p>
+  </div>
+</div>
+
+<div class="article-meta">
+  <div class="meta-left">
+    <span class="meta-author">— RC</span>
+    <div class="meta-divider"></div>
+    <span class="meta-date">Spring 2026</span>
+  </div>
+  <span class="meta-category">Culture</span>
+</div>
+
+<div class="article-body">
+
+  <p>When the world thinks of fashion, it thinks of Paris. The runways, the houses, the mythology of French taste, all of it carefully constructed and endlessly celebrated. India's contributions to the global wardrobe, however, exist in a quieter register. The bandhgala, block prints, paisley, cashmere, even the word pyjama traces back to the subcontinent. Borrowed extensively, credited rarely. When Michael B. Jordan walked onto the Oscar stage on March 15, 2026, and accepted Best Actor in what every publication called a Nehru jacket, a Mandarin collar, a Chinese-inspired silhouette, the vocabulary was familiar. The origin was not.</p>
+
+  <p>The garment was not a Chinese import. It was not a modern invention. It was a bandhgala, a silhouette with a lineage that predates Nehru by centuries and extends back to the royal courts of Jodhpur, Rajasthan. The Maharaja of Jodhpur fused the traditional angarkha with structured colonial tailoring to create the fitted, stand-collar jacket now worn at weddings, state dinners, and apparently, Oscar ceremonies. The Jodhpur polo team brought it to London in the 1930s. That is how the West first encountered it. The credit, as usual, did not follow.</p>
+
+  <div class="pull-quote">
+    <p>"Borrowed extensively, credited rarely."</p>
+  </div>
+
+  <p>India's contributions to global dress have long been absorbed without attribution. Paisley originates in Kashmir, not Scotland. Cashmere is named after the same region yet marketed as a European luxury. Block prints carry centuries of Indian craft tradition and are sold as bohemian aesthetic. Pyjamas began as Indian everyday attire. The pattern is consistent. The garment travels. The origin stays behind.</p>
+
+  <p>Fashion capitals are defined as Paris, Milan, New York. India, despite centuries of textile innovation, is positioned as supplier rather than source. Its muslin, indigo, and chintz shaped European industries long before the rise of couture houses. Yet the subcontinent rarely appears in the conversation as a fashion authority, only as an influence, an inspiration, a mood board.</p>
+
+  <p>Language is where this happens most quietly. To call a bandhgala a Nehru jacket reduces four centuries of royal tailoring to a mid-20th century political association. To call it a Mandarin collar collapses entirely distinct Asian traditions into a single vague category. Neither term is neutral. Both redirect the credit.</p>
+
+  <div class="pull-quote">
+    <p>"To call a bandhgala a Nehru jacket reduces four centuries of royal tailoring to a mid-20th century political association."</p>
+  </div>
+
+  <p>On March 15, 2026, one of Hollywood's most watched men stood on the world's most watched stage in a silhouette that began in the courts of Rajasthan. Every major publication got the look right. Nobody got the name right.</p>
+
+  <p>The bandhgala was never a borrowed silhouette. It was the original. Fashion kept renaming it. It never stopped being Indian.</p>
+
+</div>
+
+<div class="sources">
+  <div class="sources-label">Sources</div>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Jodhpuri" target="_blank">Wikipedia — Jodhpuri Suit: History and Origins</a></li>
+    <li><a href="https://www.rathore.com/blogs/news/origins-of-the-jodhpur-bandhgala" target="_blank">Raghavendra Rathore — Origins of the Jodhpur Bandhgala</a></li>
+    <li><a href="https://www.essence.com/awards-events/michael-b-jordan-oscars-win-custom-louis-vuitton/" target="_blank">Essence — Michael B. Jordan Won First Oscar Wearing Custom Louis Vuitton</a></li>
+    <li><a href="https://theglassmagazine.com/the-making-of-michael-b-jordans-louis-vuitton-suit-for-the-academy-awards/" target="_blank">The Glass Magazine — The Making of Michael B. Jordan's Louis Vuitton Suit</a></li>
+    <li><a href="https://tomandlorenzo.com/2026/03/oscars-2026-sinners-star-michael-b-jordan-in-louis-vuitton/" target="_blank">Tom & Lorenzo — Oscars 2026: Michael B. Jordan in Louis Vuitton</a></li>
+    <li><a href="https://britbrief.co.uk/business/transport/indian-railways-drops-bandhgala-jacket-from-uniform.html" target="_blank">Brit Brief — Is the Bandhgala a Relic of Colonialism or Inherently Indian?</a></li>
+  </ul>
+</div>
+
+<div class="article-back">
+  <a href="culture-articles.html" class="back-link">← Back to Culture</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Remarcaviar</a>
+  <span class="footer-copy">© 2026 Remarcaviar</span>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.article-body p, .pull-quote, .sources').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
