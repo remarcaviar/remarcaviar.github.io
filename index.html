@@ -476,6 +476,13 @@
             color: #111;
         }
 
+        .sri-excerpt {
+            margin-top: 8px;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: #666;
+        }
+
         .search-empty {
             font-size: .85rem;
             color: #aaa;
@@ -731,6 +738,7 @@
         </div>
     </div>
 
+    <script src="search.js"></script>
     <script>
         // Cursor
         const cur = document.getElementById('cur'), ring = document.getElementById('cur-ring');
@@ -747,41 +755,7 @@
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-        // Search - each page starts with page-local cards only
-        const buildAllArticles = () => {
-            const allArticles = [];
-            const pageTitle = document.querySelector('.page-title')?.textContent || '';
-            const category = pageTitle.split(' ')[0];
-            const currentPage = window.location.pathname.split('/').pop() || '';
-            document.querySelectorAll('.article-card').forEach((card) => {
-                const title = card.querySelector('.article-title')?.textContent?.trim();
-                if (title && !allArticles.some(a => a.title === title)) {
-                    allArticles.push({ title, cat: category, page: currentPage });
-                }
-            });
-            return allArticles;
-        };
-        const articles = buildAllArticles();
-        const panel = document.getElementById('search-panel');
-        const input = document.getElementById('searchInput');
-        const results = document.getElementById('searchResults');
-        document.getElementById('searchBtn').addEventListener('click', () => { panel.classList.add('open'); setTimeout(() => input.focus(), 200); });
-        document.getElementById('searchClose').addEventListener('click', () => panel.classList.remove('open'));
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') panel.classList.remove('open'); });
-        input.addEventListener('input', () => {
-            const q = input.value.trim().toLowerCase();
-            results.innerHTML = '';
-            if (!q) return;
-            const filtered = articles.filter(a => a.title.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q));
-            if (filtered.length === 0) { results.innerHTML = '<p class="search-empty">No results found.</p>'; return; }
-            filtered.forEach(a => {
-                const el = document.createElement('a');
-                el.href = a.page;
-                el.className = 'search-result-item';
-                el.innerHTML = `<div class="sri-cat">${a.cat}</div><div class="sri-title">${a.title}</div>`;
-                results.appendChild(el);
-            });
-        });
+        initSiteSearch();
     </script>
 </body>
 
