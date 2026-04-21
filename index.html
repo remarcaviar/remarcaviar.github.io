@@ -320,6 +320,10 @@
             max-width: 480px;
         }
 
+        .cat-desc-mobile {
+            display: none;
+        }
+
         .cat-right {
             display: flex;
             align-items: center;
@@ -640,42 +644,36 @@
             }
 
             .nav-logo {
-                font-size: 1.08rem;
-                letter-spacing: 0.12em;
+                font-size: 1.18rem;
+                letter-spacing: 0.14em;
             }
 
             .nav-search-btn {
                 right: 16px;
-                width: 40px;
-                height: 40px;
-                display: grid;
-                place-items: center;
-                border: 1px solid rgba(0, 0, 0, .1);
-                border-radius: 999px;
-                background: rgba(255, 255, 255, .7);
+                width: 32px;
+                height: 32px;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                background: transparent;
             }
 
             .nav-bottom {
-                justify-content: flex-start;
-                gap: 10px;
-                padding: 10px 16px 12px;
-                overflow-x: auto;
-                scrollbar-width: none;
-            }
-
-            .nav-bottom::-webkit-scrollbar {
-                display: none;
+                justify-content: center;
+                gap: 22px;
+                padding: 12px 16px 14px;
+                overflow-x: visible;
             }
 
             .nav-bottom a {
-                flex: 0 0 auto;
-                font-size: 0.58rem;
-                letter-spacing: 0.16em;
-                padding: 8px 2px;
+                flex: initial;
+                font-size: 0.64rem;
+                font-weight: 500;
+                letter-spacing: 0.22em;
+                padding: 0;
                 border: none;
-                border-radius: 999px;
                 background: transparent;
-                color: rgba(17, 17, 17, .58);
+                color: rgba(17, 17, 17, .88);
             }
 
             .nav-bottom a::after {
@@ -683,7 +681,7 @@
             }
 
             .nav-spacer {
-                height: calc(108px + env(safe-area-inset-top));
+                height: calc(102px + env(safe-area-inset-top));
             }
 
             .cat-item {
@@ -712,6 +710,20 @@
                 line-height: 1.75;
                 max-width: 27ch;
                 color: rgba(255, 255, 255, .78);
+            }
+
+            .cat-desc {
+                display: none;
+            }
+
+            .cat-desc-mobile {
+                display: block;
+                font-size: 0.77rem;
+                font-weight: 400;
+                line-height: 1.65;
+                letter-spacing: 0.04em;
+                color: rgba(255, 255, 255, .74);
+                max-width: 24ch;
             }
 
             .cat-right {
@@ -797,6 +809,7 @@
                         <h2 class="cat-title">Fashion</h2>
                         <p class="cat-desc">Where aesthetics meet intention. The language of dress — the silhouettes,
                             the houses, the quiet codes that define how the world sees itself season after season.</p>
+                        <p class="cat-desc-mobile">Silhouettes, houses, and the codes of dress.</p>
                     </div>
                     <a href="fashion-articles.html" class="cat-right">Explore <span>→</span></a>
                 </div>
@@ -811,6 +824,7 @@
                         <p class="cat-desc">Behind every great house is a greater strategy. Decoding the boardroom
                             decisions, brand pivots, and power moves that shape the fashion industry from the inside
                             out.</p>
+                        <p class="cat-desc-mobile">Strategy, power, and the business of luxury.</p>
                     </div>
                     <a href="blogs.html#business" class="cat-right">Explore <span>→</span></a>
                 </div>
@@ -825,6 +839,7 @@
                         <p class="cat-desc">Not what is trending — but why. Tracing the cultural undercurrents, the
                             runways, the streets, and the moments that crystallise into the movements that define an
                             era.</p>
+                        <p class="cat-desc-mobile">Objects and obsessions shaping what comes next.</p>
                     </div>
                     <a href="trends-articles.html" class="cat-right">Explore <span>→</span></a>
                 </div>
@@ -838,6 +853,7 @@
                         <h2 class="cat-title">Culture</h2>
                         <p class="cat-desc">Fashion does not exist in a vacuum. The art, music, politics, and ideas that
                             bleed into what is worn — and what wearing it means in the world today.</p>
+                        <p class="cat-desc-mobile">Identity, memory, and the stories clothes carry.</p>
                     </div>
                     <a href="culture-articles.html" class="cat-right">Explore <span>→</span></a>
                 </div>
