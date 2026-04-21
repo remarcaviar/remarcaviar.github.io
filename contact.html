@@ -525,42 +525,36 @@
             }
 
             .nav-logo {
-                font-size: 1.08rem;
-                letter-spacing: 0.12em;
+                font-size: 1.18rem;
+                letter-spacing: 0.14em;
             }
 
             .nav-search-btn {
                 right: 16px;
-                width: 40px;
-                height: 40px;
-                display: grid;
-                place-items: center;
-                border: 1px solid rgba(0, 0, 0, .1);
-                border-radius: 999px;
-                background: rgba(255, 255, 255, .7);
+                width: 32px;
+                height: 32px;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                background: transparent;
             }
 
             .nav-bottom {
-                justify-content: flex-start;
-                gap: 10px;
-                padding: 10px 16px 12px;
-                overflow-x: auto;
-                scrollbar-width: none;
-            }
-
-            .nav-bottom::-webkit-scrollbar {
-                display: none;
+                justify-content: center;
+                gap: 22px;
+                padding: 12px 16px 14px;
+                overflow-x: visible;
             }
 
             .nav-bottom a {
-                flex: 0 0 auto;
-                font-size: 0.58rem;
-                letter-spacing: 0.16em;
-                padding: 8px 2px;
+                flex: initial;
+                font-size: 0.64rem;
+                font-weight: 500;
+                letter-spacing: 0.22em;
+                padding: 0;
                 border: none;
-                border-radius: 999px;
                 background: transparent;
-                color: rgba(17, 17, 17, .58);
+                color: rgba(17, 17, 17, .88);
             }
 
             .nav-bottom a::after {
@@ -568,7 +562,7 @@
             }
 
             .nav-spacer {
-                height: calc(108px + env(safe-area-inset-top));
+                height: calc(102px + env(safe-area-inset-top));
             }
 
             .contact-wrap {
