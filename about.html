@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>About — Remarcaviar</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap"
@@ -19,6 +19,7 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -32,6 +33,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #cur {
@@ -395,6 +397,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity .3s;
+            padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
         }
 
         #search-panel.open {
@@ -605,6 +608,143 @@
 
             .footer-links a {
                 font-size: 0.7rem
+            }
+        }
+
+        @media(max-width:560px) {
+            .nav-top {
+                padding: calc(14px + env(safe-area-inset-top)) 16px 14px;
+            }
+
+            .nav-logo {
+                font-size: 1.08rem;
+                letter-spacing: 0.12em;
+            }
+
+            .nav-search-btn {
+                right: 16px;
+                width: 40px;
+                height: 40px;
+                display: grid;
+                place-items: center;
+                border: 1px solid rgba(0, 0, 0, .1);
+                border-radius: 999px;
+                background: rgba(255, 255, 255, .7);
+            }
+
+            .nav-bottom {
+                justify-content: flex-start;
+                gap: 10px;
+                padding: 10px 16px 12px;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+
+            .nav-bottom::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-bottom a {
+                flex: 0 0 auto;
+                font-size: 0.58rem;
+                letter-spacing: 0.18em;
+                padding: 9px 12px;
+                border: 1px solid rgba(0, 0, 0, .1);
+                border-radius: 999px;
+                background: rgba(255, 255, 255, .82);
+            }
+
+            .nav-bottom a::after {
+                display: none;
+            }
+
+            .nav-spacer {
+                height: calc(108px + env(safe-area-inset-top));
+            }
+
+            .about-wrap {
+                padding: 38px 18px 48px;
+            }
+
+            .about-eyebrow {
+                font-size: 0.62rem;
+                letter-spacing: 0.24em;
+                margin-bottom: 14px;
+            }
+
+            .about-title {
+                font-size: clamp(2.3rem, 11vw, 3.6rem);
+                margin-bottom: 34px;
+                line-height: 0.96;
+            }
+
+            .about-block {
+                margin-bottom: 32px;
+                padding-top: 24px;
+            }
+
+            .block-label {
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 12px;
+            }
+
+            .block-text {
+                font-size: 0.98rem;
+                line-height: 1.75;
+            }
+
+            .contact-strip {
+                padding: 28px 18px;
+                gap: 18px;
+            }
+
+            .strip-label {
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+            }
+
+            .strip-title {
+                font-size: 1.2rem;
+                line-height: 1.35;
+            }
+
+            .strip-email {
+                font-size: 1rem;
+                overflow-wrap: anywhere;
+            }
+
+            footer {
+                padding: 24px 18px 28px;
+            }
+
+            .footer-links {
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                padding: 0 18px env(safe-area-inset-bottom);
+            }
+
+            .search-input {
+                font-size: 1.45rem;
+                padding-bottom: 10px;
+            }
+
+            .search-results {
+                margin-top: 24px;
+                max-height: 52vh;
+            }
+
+            .search-result-item {
+                padding: 14px 0;
+            }
+
+            .search-close {
+                top: calc(16px + env(safe-area-inset-top));
+                right: 16px;
+                letter-spacing: 0.18em;
             }
         }
     </style>
