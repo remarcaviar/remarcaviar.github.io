@@ -211,6 +211,13 @@
             #cur, #cur-ring { display: none !important; }
         }
 
+        .cat-media-link {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: block;
+        }
+
         .cat-item img {
             position: absolute;
             inset: 0;
@@ -263,6 +270,13 @@
             letter-spacing: .04em;
             line-height: 1;
             margin-bottom: 20px;
+        }
+
+        .cat-title-link {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
         }
 
         .cat-desc {
@@ -766,11 +780,12 @@
     </div>
     <section>
         <div class="cat-item rv" id="fashion">
+            <a href="fashion-articles.html" class="cat-media-link" aria-label="Go to Fashion articles"></a>
             <img src="fashion.jpeg" alt="Fashion">
             <div class="cat-content">
                 <div>
                     <div class="cat-label">Category</div>
-                    <h2 class="cat-title">Fashion</h2>
+                    <h2 class="cat-title"><a href="fashion-articles.html" class="cat-title-link">Fashion</a></h2>
                     <p class="cat-desc">Where aesthetics meet intention. The language of dress — the silhouettes, the
                         houses, the quiet codes that define how the world sees itself season after season.</p>
                     <p class="cat-desc-mobile">Silhouettes, houses, and the codes of dress.</p>
@@ -780,11 +795,12 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d1" id="business">
+            <a href="business-articles.html" class="cat-media-link" aria-label="Go to Business articles"></a>
             <img src="business.jpeg" alt="Business">
             <div class="cat-content">
                 <div>
                     <div class="cat-label">Category</div>
-                    <h2 class="cat-title">Business</h2>
+                    <h2 class="cat-title"><a href="business-articles.html" class="cat-title-link">Business</a></h2>
                     <p class="cat-desc">Behind every great house is a greater strategy. Decoding the boardroom
                         decisions, brand pivots, and power moves that shape the fashion industry from the inside out.
                     </p>
@@ -795,11 +811,12 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d2" id="trends">
+            <a href="trends-articles.html" class="cat-media-link" aria-label="Go to Trends articles"></a>
             <img src="trends.jpeg" alt="Trends">
             <div class="cat-content">
                 <div>
                     <div class="cat-label">Category</div>
-                    <h2 class="cat-title">Trends</h2>
+                    <h2 class="cat-title"><a href="trends-articles.html" class="cat-title-link">Trends</a></h2>
                     <p class="cat-desc">Not what is trending — but why. Tracing the cultural undercurrents, the runways,
                         the streets, and the moments that crystallise into the movements that define an era.</p>
                     <p class="cat-desc-mobile">Objects and obsessions shaping what comes next.</p>
@@ -809,11 +826,12 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d3" id="culture">
+            <a href="culture-articles.html" class="cat-media-link" aria-label="Go to Culture articles"></a>
             <img src="culture.jpeg" alt="Culture">
             <div class="cat-content">
                 <div>
                     <div class="cat-label">Category</div>
-                    <h2 class="cat-title">Culture</h2>
+                    <h2 class="cat-title"><a href="culture-articles.html" class="cat-title-link">Culture</a></h2>
                     <p class="cat-desc">Fashion does not exist in a vacuum. The art, music, politics, and ideas that
                         bleed into what is worn — and what wearing it means in the world today.</p>
                     <p class="cat-desc-mobile">Identity, memory, and the stories clothes carry.</p>
