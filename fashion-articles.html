@@ -270,6 +270,12 @@
             margin-bottom: 12px;
         }
 
+        .article-link {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+
         .article-excerpt {
             font-size: .82rem;
             font-weight: 300;
@@ -416,11 +422,18 @@
             border-bottom: 1px solid rgba(0, 0, 0, .07);
             text-decoration: none;
             display: block;
-            transition: padding-left .2s;
+            transition: padding-left .35s ease, opacity .6s ease, transform .6s cubic-bezier(.16, 1, .3, 1);
+            opacity: 0;
+            transform: translateY(14px);
         }
 
         .search-result-item:hover {
             padding-left: 8px;
+        }
+
+        .search-result-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .sri-cat {
@@ -731,7 +744,7 @@
                 </svg>
             </button></div>
         <div class="nav-bottom">
-            <a href="blogs.html" class="active">Blogs</a>
+            <a href="blogs.html" class="active">Articles</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </div>
@@ -756,8 +769,10 @@
     <div class="articles-grid" id="articlesGrid">
         <div class="article-card">
             <div class="article-num">01</div>
-            <h2 class="article-title">Gucci Primavera, FW26: The Internet Was Wrong</h2>
-            <p class="article-excerpt">On reverence, restraint, and why the internet needs to sit down</p>
+            <a href="fashion-article-1.html" class="article-link">
+                <h2 class="article-title">Gucci Primavera, FW26: The Internet Was Wrong</h2>
+                <p class="article-excerpt">On reverence, restraint, and why the internet needs to sit down</p>
+            </a>
             <a href="fashion-article-1.html" class="article-read">Read more →</a>
         </div>
     </div>
