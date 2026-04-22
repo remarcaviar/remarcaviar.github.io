@@ -211,13 +211,6 @@
             #cur, #cur-ring { display: none !important; }
         }
 
-        .cat-media-link {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            display: block;
-        }
-
         .cat-item img {
             position: absolute;
             inset: 0;
@@ -231,6 +224,11 @@
         .cat-item:hover img {
             transform: scale(1.04);
             filter: brightness(.58);
+        }
+
+        .cat-item.is-opening img {
+            transform: scale(1.1);
+            filter: brightness(.52);
         }
 
         .cat-content {
@@ -425,11 +423,18 @@
             border-bottom: 1px solid rgba(0, 0, 0, .07);
             text-decoration: none;
             display: block;
-            transition: padding-left .2s;
+            transition: padding-left .35s ease, opacity .6s ease, transform .6s cubic-bezier(.16, 1, .3, 1);
+            opacity: 0;
+            transform: translateY(14px);
         }
 
         .search-result-item:hover {
             padding-left: 8px;
+        }
+
+        .search-result-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .sri-cat {
@@ -758,7 +763,7 @@
             </button>
         </div>
         <div class="nav-bottom">
-            <a href="blogs.html" class="active">Blogs</a>
+            <a href="blogs.html" class="active">Articles</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </div>
@@ -780,7 +785,6 @@
     </div>
     <section>
         <div class="cat-item rv" id="fashion" data-href="fashion-articles.html" tabindex="0" role="link" aria-label="Go to Fashion articles">
-            <a href="fashion-articles.html" class="cat-media-link" aria-label="Go to Fashion articles"></a>
             <img src="fashion.jpeg" alt="Fashion">
             <div class="cat-content">
                 <div>
@@ -795,7 +799,6 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d1" id="business" data-href="business-articles.html" tabindex="0" role="link" aria-label="Go to Business articles">
-            <a href="business-articles.html" class="cat-media-link" aria-label="Go to Business articles"></a>
             <img src="business.jpeg" alt="Business">
             <div class="cat-content">
                 <div>
@@ -811,7 +814,6 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d2" id="trends" data-href="trends-articles.html" tabindex="0" role="link" aria-label="Go to Trends articles">
-            <a href="trends-articles.html" class="cat-media-link" aria-label="Go to Trends articles"></a>
             <img src="trends.jpeg" alt="Trends">
             <div class="cat-content">
                 <div>
@@ -826,7 +828,6 @@
         </div>
         <div class="cat-divider"></div>
         <div class="cat-item rv d3" id="culture" data-href="culture-articles.html" tabindex="0" role="link" aria-label="Go to Culture articles">
-            <a href="culture-articles.html" class="cat-media-link" aria-label="Go to Culture articles"></a>
             <img src="culture.jpeg" alt="Culture">
             <div class="cat-content">
                 <div>
@@ -858,16 +859,24 @@
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
         document.querySelectorAll('.cat-item[data-href]').forEach((item) => {
+            const openCard = () => {
+                if (item.classList.contains('is-opening')) return;
+                item.classList.add('is-opening');
+                setTimeout(() => {
+                    window.location.href = item.dataset.href;
+                }, 1200);
+            };
+
             item.addEventListener('click', (event) => {
                 if (event.target.closest('a')) return;
-                window.location.href = item.dataset.href;
+                openCard();
             });
 
             item.addEventListener('keydown', (event) => {
                 if (event.key !== 'Enter' && event.key !== ' ') return;
                 if (event.target.closest('a')) return;
                 event.preventDefault();
-                window.location.href = item.dataset.href;
+                openCard();
             });
         });
 
