@@ -97,7 +97,7 @@ function initSiteSearch() {
             results.appendChild(item);
 
             requestAnimationFrame(() => {
-                setTimeout(() => item.classList.add('visible'), index * 70);
+                setTimeout(() => item.classList.add('visible'), index * 110);
             });
         });
     };
