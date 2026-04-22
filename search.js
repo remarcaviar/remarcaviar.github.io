@@ -85,7 +85,7 @@ function initSiteSearch() {
             return;
         }
 
-        matches.forEach(({ article }) => {
+        matches.forEach(({ article }, index) => {
             const item = document.createElement('a');
             item.href = article.url;
             item.className = 'search-result-item';
@@ -95,6 +95,10 @@ function initSiteSearch() {
                 <div class="sri-excerpt">${article.excerpt}</div>
             `;
             results.appendChild(item);
+
+            requestAnimationFrame(() => {
+                setTimeout(() => item.classList.add('visible'), index * 70);
+            });
         });
     };
 
