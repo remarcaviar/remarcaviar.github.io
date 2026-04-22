@@ -449,11 +449,18 @@
             border-bottom: 1px solid rgba(0, 0, 0, .07);
             text-decoration: none;
             display: block;
-            transition: padding-left .2s;
+            transition: padding-left .35s ease, opacity .6s ease, transform .6s cubic-bezier(.16, 1, .3, 1);
+            opacity: 0;
+            transform: translateY(14px);
         }
 
         .search-result-item:hover {
             padding-left: 8px;
+        }
+
+        .search-result-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .sri-cat {
@@ -758,7 +765,7 @@
                 </svg>
             </button></div>
         <div class="nav-bottom">
-            <a href="blogs.html">Blogs</a>
+            <a href="blogs.html">Articles</a>
             <a href="about.html" class="active">About</a>
             <a href="contact.html">Contact</a>
         </div>
