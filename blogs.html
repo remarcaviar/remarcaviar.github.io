@@ -207,7 +207,7 @@
             overflow: hidden;
             display: flex;
             align-items: flex-end;
-            cursor: auto;
+            cursor: pointer;
             #cur, #cur-ring { display: none !important; }
         }
 
@@ -779,7 +779,7 @@
         <h1 class="page-title">All <em>Categories</em></h1>
     </div>
     <section>
-        <div class="cat-item rv" id="fashion">
+        <div class="cat-item rv" id="fashion" data-href="fashion-articles.html" tabindex="0" role="link" aria-label="Go to Fashion articles">
             <a href="fashion-articles.html" class="cat-media-link" aria-label="Go to Fashion articles"></a>
             <img src="fashion.jpeg" alt="Fashion">
             <div class="cat-content">
@@ -794,7 +794,7 @@
             </div>
         </div>
         <div class="cat-divider"></div>
-        <div class="cat-item rv d1" id="business">
+        <div class="cat-item rv d1" id="business" data-href="business-articles.html" tabindex="0" role="link" aria-label="Go to Business articles">
             <a href="business-articles.html" class="cat-media-link" aria-label="Go to Business articles"></a>
             <img src="business.jpeg" alt="Business">
             <div class="cat-content">
@@ -810,7 +810,7 @@
             </div>
         </div>
         <div class="cat-divider"></div>
-        <div class="cat-item rv d2" id="trends">
+        <div class="cat-item rv d2" id="trends" data-href="trends-articles.html" tabindex="0" role="link" aria-label="Go to Trends articles">
             <a href="trends-articles.html" class="cat-media-link" aria-label="Go to Trends articles"></a>
             <img src="trends.jpeg" alt="Trends">
             <div class="cat-content">
@@ -825,7 +825,7 @@
             </div>
         </div>
         <div class="cat-divider"></div>
-        <div class="cat-item rv d3" id="culture">
+        <div class="cat-item rv d3" id="culture" data-href="culture-articles.html" tabindex="0" role="link" aria-label="Go to Culture articles">
             <a href="culture-articles.html" class="cat-media-link" aria-label="Go to Culture articles"></a>
             <img src="culture.jpeg" alt="Culture">
             <div class="cat-content">
@@ -856,6 +856,20 @@
         (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
         const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: .08 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.cat-item[data-href]').forEach((item) => {
+            item.addEventListener('click', (event) => {
+                if (event.target.closest('a')) return;
+                window.location.href = item.dataset.href;
+            });
+
+            item.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                if (event.target.closest('a')) return;
+                event.preventDefault();
+                window.location.href = item.dataset.href;
+            });
+        });
 
         initSiteSearch();
     </script>
