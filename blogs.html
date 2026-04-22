@@ -888,6 +888,12 @@
             });
         });
 
+        window.addEventListener('pageshow', () => {
+            document.querySelectorAll('.cat-item.is-opening').forEach((item) => {
+                item.classList.remove('is-opening');
+            });
+        });
+
         initSiteSearch();
     </script>
 </body>
