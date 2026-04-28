@@ -21,6 +21,13 @@ const SEARCH_INDEX = [
         keywords: ['bandhgala', 'india', 'culture', 'tailoring', 'formalwear', 'fashion vocabulary']
     },
     {
+        title: 'The Dress That Rewrote the Bond Girl',
+        category: 'Culture',
+        excerpt: 'On Azzedine Alaïa, Grace Jones, and what happens when fashion refuses its own rules.',
+        url: 'culture-article-2.html',
+        keywords: ['dress', 'bond girl', 'azzedine alaia', 'grace jones', 'culture', 'fashion', 'james bond']
+    },
+    {
         title: 'The Shoe That Was Never Meant to Be Beautiful',
         category: 'Trends',
         excerpt: "How Maison Margiela's Tabi became fashion's most enduring act of discomfort.",
