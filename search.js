@@ -7,6 +7,13 @@ const SEARCH_INDEX = [
         keywords: ['gucci', 'primavera', 'fw26', 'runway', 'fashion', 'internet', 'luxury']
     },
     {
+        title: 'Fashion Is Art. And That Means Nothing.',
+        category: 'Fashion',
+        excerpt: 'A critique of why calling fashion art often says less than people think it does.',
+        url: 'fashion-article-2.html',
+        keywords: ['fashion is art', 'met gala', 'costume art', 'anna deller-yee', 'mugler', 'karan johar', 'fashion', 'art']
+    },
+    {
         title: 'The Loudest Thing Bottega Veneta Ever Did Was Say Nothing',
         category: 'Business',
         excerpt: 'How deleting Instagram became the most strategic move in luxury marketing.',
