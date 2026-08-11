@@ -59,6 +59,41 @@ const FALLBACK_SEARCH_INDEX = [
 
 let searchIndexPromise;
 
+function initCategoryArticleOrdering() {
+    const grid = document.getElementById('articlesGrid');
+
+    if (!grid) {
+        return;
+    }
+
+    const cards = Array.from(grid.querySelectorAll('.article-card'));
+
+    if (!cards.length) {
+        return;
+    }
+
+    const orderedCards = cards
+        .map((card, originalIndex) => ({
+            card,
+            originalIndex,
+            rank: getArticleCardSortRank(card)
+        }))
+        .sort((left, right) => (
+            right.rank - left.rank || left.originalIndex - right.originalIndex
+        ))
+        .map(({ card }) => card);
+
+    orderedCards.forEach((card, index) => {
+        const number = card.querySelector('.article-num');
+
+        if (number) {
+            number.textContent = String(index + 1).padStart(2, '0');
+        }
+
+        grid.appendChild(card);
+    });
+}
+
 function initSiteSearch() {
     const panel = document.getElementById('search-panel');
     const input = document.getElementById('searchInput');
@@ -305,10 +340,46 @@ function dedupeArticles(articles) {
     });
 }
 
+function getArticleCardSortRank(card) {
+    const explicitSortValue = card.dataset.sortOrder ?? card.dataset.sort;
+
+    if (explicitSortValue !== undefined && explicitSortValue !== '') {
+        const explicitRank = Number(explicitSortValue);
+
+        if (!Number.isNaN(explicitRank)) {
+            return explicitRank;
+        }
+    }
+
+    const explicitDateValue = card.dataset.updated || card.dataset.published || '';
+    const explicitDate = Date.parse(explicitDateValue);
+
+    if (!Number.isNaN(explicitDate)) {
+        return explicitDate;
+    }
+
+    const link = card.querySelector('.article-link[href], .article-read[href]');
+    const url = link ? link.getAttribute('href') : '';
+
+    return getArticleSortRankFromUrl(url);
+}
+
+function getArticleSortRankFromUrl(url) {
+    const match = String(url || '').match(/article-(\d+)\.html(?:[?#].*)?$/);
+
+    return match ? Number(match[1]) : 0;
+}
+
 function uniqueStrings(values) {
     return Array.from(new Set(values));
 }
 
 function textFrom(element) {
     return element ? element.textContent.replace(/\s+/g, ' ').trim() : '';
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCategoryArticleOrdering);
+} else {
+    initCategoryArticleOrdering();
 }
